@@ -7,6 +7,13 @@
   </head>
   <body>
     <div id="app"></div>
+    <script>
+      let htmlWidth=document.documentElement.clientWidth || document.body.clientWidth;
+      let htmlDom=document.getElementsByTagName('html')[0];
+      htmlWidth=htmlWidth>750 ? 750 : htmlWidth
+      htmlDom.style.fontSize=htmlWidth/20+'px';
+    
+    </script>
     <!-- built files will be auto injected -->
   </body>
 </html>

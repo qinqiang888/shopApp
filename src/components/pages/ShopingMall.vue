@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import axios from 'axios'
     export default {
         data() {
             return {
@@ -38,6 +39,17 @@
                  ]
             }
         },
+        created(){
+            axios({
+                url: 'https://www.easy-mock.com/mock/5c7dd08e9a73e31352e88034/api/shopList',
+                method: 'get',
+            })
+            .then(response => {
+                console.log(response)
+            })
+            .catch((error) => {     
+            })
+        }
     }
 </script>
 

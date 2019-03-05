@@ -22,7 +22,14 @@
         </van-swipe-item>
     </van-swipe>
     </div>
+    <!-- type-bar -->
+    <div class="type-bar">
+    <div  v-for="(cate,index) in category" :key="index" >
+            <img :src="cate.image" width="90%" />
+            <span>{{cate.mallCategoryName}}</span> 
     </div>
+    </div>
+</div>
 </template>
 
 <script>
@@ -36,7 +43,8 @@ import axios from 'axios'
                     {imageUrl:'http://h.hiphotos.baidu.com/image/pic/item/cefc1e178a82b901fd40c8077d8da9773912ef11.jpg'},
                     {imageUrl:'http://b.hiphotos.baidu.com/image/pic/item/78310a55b319ebc4cee036bd8c26cffc1e17167d.jpg'},
                     {imageUrl:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552315885&di=a985080247548e256fc87a6212ebef0c&imgtype=jpg&er=1&src=http%3A%2F%2Fimage.17173.com%2Fbbs%2Fv1%2F2010%2F09%2F08%2F1283947526539.jpg'},
-                 ]
+                 ],
+                 category:[],
             }
         },
         created(){
@@ -45,10 +53,13 @@ import axios from 'axios'
                 method: 'get',
             })
             .then(response => {
-                console.log(response)
+                this.category=response.data.data.category;
             })
             .catch((error) => {     
             })
+        },
+        mounted(){
+            
         }
     }
 </script>
@@ -78,5 +89,19 @@ import axios from 'axios'
       clear: both;
       max-height: 10rem;
       overflow: hidden;
+  }
+   .type-bar{
+      background-color: #fff;
+      margin:0 .3rem .3rem .3rem;
+      border-radius: .3rem;
+      font-size:14px;
+      display: flex;
+      flex-direction:row;
+      flex-wrap:nowrap;
+  }
+  .type-bar div{
+      padding: .3rem;
+      font-size: 12px;
+      text-align: center;
   }
 </style>

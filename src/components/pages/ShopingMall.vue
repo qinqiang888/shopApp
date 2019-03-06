@@ -53,6 +53,22 @@
     <floor-component :floorData="floor1" :floorTitle="floorName.floor1"></floor-component>
     <floor-component :floorData="floor2" :floorTitle="floorName.floor2"></floor-component>
     <floor-component :floorData="floor3" :floorTitle="floorName.floor3"></floor-component>
+     <!--Hot Area-->
+    <div class="hot-area">
+        <div class="hot-title">热卖商品</div>
+        <div class="hot-goods">
+        <!--这里需要一个list组件-->
+            <van-list>
+                <van-row gutter="20">
+                    <van-col span="12" v-for="(item , index) in hotGoods" :key="index">
+                            <goods-info :goodsId="item.goodsId" :goodsImage="item.image" :goodsName="item.name" :goodsPrice="item.price">
+
+                            </goods-info>
+                    </van-col>
+                </van-row>
+            </van-list>
+        </div>
+    </div>
 </div>
 </template>
 
@@ -61,7 +77,9 @@ import axios from 'axios'
   import 'swiper/dist/css/swiper.css'
     import {swiper , swiperSlide} from 'vue-awesome-swiper'
     import floorComponent from '../component/floorComponent'
+    import goodsInfo from '../component/goodsInfo'
     import { toMoney } from '@/filter/moneyFilter.js'
+    import url from '@/serviceAPI.config.js'
     export default {
         data() {
             return {
@@ -90,7 +108,7 @@ import axios from 'axios'
                 return toMoney(money)
             }
         },
-        components:{swiper,swiperSlide,floorComponent},
+        components:{swiper,swiperSlide,floorComponent,goodsInfo},
         created(){
             axios({
                 url: 'https://www.easy-mock.com/mock/5c7dd08e9a73e31352e88034/api/shopList',
@@ -156,5 +174,16 @@ import axios from 'axios'
         font-size:12px;
         text-align: center;
         flex:1;
+    }
+    .hot-area{
+        text-align: center;
+        font-size:14px;
+        height: 1.8rem;
+        line-height:1.8rem;
+    }
+    .hot-goods{
+        height: 130rem;
+        overflow: hidden;
+        background-color: #fff;
     }
 </style>

@@ -79,7 +79,7 @@ import axios from 'axios'
     import floorComponent from '../component/floorComponent'
     import goodsInfo from '../component/goodsInfo'
     import { toMoney } from '@/filter/moneyFilter.js'
-    import url from '@/serviceAPI.config.js'
+    import requestUrl from '@/serviceAPI.config.js'
     export default {
         data() {
             return {
@@ -103,15 +103,10 @@ import axios from 'axios'
                  hotGoods:[],  //热卖商品
             }
         },
-        filters:{
-            moneyFilter(money){
-                return toMoney(money)
-            }
-        },
         components:{swiper,swiperSlide,floorComponent,goodsInfo},
         created(){
             axios({
-                url: 'https://www.easy-mock.com/mock/5c7dd08e9a73e31352e88034/api/shopList',
+                url: requestUrl.getShopingMallInfo,
                 method: 'get',
             })
             .then(response => {

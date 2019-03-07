@@ -9,16 +9,14 @@ App.use(async(res)=>{
 ;(async()=>{
     await connect()
     initSchemas();
-    const User = mongoose.model('User')
-    let oneUser =new User({username:'qinqiang',password:'123456',userage:28})
+    const userInfo = mongoose.model('userInfo')
+    let oneUser =new userInfo({username:'maryloveqq',password:'123456',userage:27})
     oneUser.save().then(()=>{
         console.log('插入成功')
-        let wherestr = {'username' : 'qinqiang'};
-        let updatestr = {'userage': '82'};
-        User.update(wherestr,updatestr).then((res)=>{
-            console.log(res)
-        })
     })
+    let user=await userInfo.findOne({username:'mary'}).exec()
+    console.log('------------------------------')
+    console.log(user)
 
 })()
 App.listen(3000,()=>{

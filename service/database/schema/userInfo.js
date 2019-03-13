@@ -21,7 +21,7 @@ UserSchema.pre('save', function(next){
         })
     })
 })
-userSchema.methods={
+UserSchema.methods={
     comparePassword:(_password,password)=>{
         return new Promise((resolve,reject)=>{
             bcrypt.compare(_password,password,(err,isMatch)=>{

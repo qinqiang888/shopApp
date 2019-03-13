@@ -36,14 +36,19 @@ router.post('/login',async(ctx)=>{
             let newUser = new User()
             await newUser.comparePassword(password,result.password)
             .then(isMatch=>{
-                ctx.body={code:200,message:isMatch}
+                if(isMatch){
+                    ctx.body={status:1,message:isMatch}
+                }else{
+                    ctx.body={status:0,message:'用户名或密码不正确'}
+                }
+                
             })
             .catch(error=>{
                 console.log(error)
-                ctx.body={code:500,message:error}
+                ctx.body={status:500,message:error}
             })
         }else{
-            ctx.body={code:200,message:'用户名不存在'}
+            ctx.body={status:0,message:'用户名不存在'}
         }
     }).catch(error=>{
         console.log(error)

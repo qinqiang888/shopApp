@@ -18,19 +18,11 @@ App.use(async(res)=>{
     res.body='<h1>my first Koa2 api </h1>'
 
 })
-// ;(async()=>{
-//     await connect()
-//     initSchemas();
-//     const userInfo = mongoose.model('userInfo')
-//     let oneUser =new userInfo({username:'admin',password:'123456',userage:27})
-//     oneUser.save().then(()=>{
-//         console.log('插入成功')
-//     })
-//     let user=await userInfo.findOne({username:'mary'}).exec()
-//     console.log('------------------------------')
-//     console.log(user)
+;(async()=>{
+    await connect()
+    initSchemas();
 
-// })()
+})()
 App.listen(3000,()=>{
     console.log('--------服务启动成功---------')
 })

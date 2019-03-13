@@ -71,9 +71,7 @@
                    }
                })
                .then(response=>{
-                   
-                 console.log(response) 
-                if(response.data.code==200 && response.data.message){
+                if(response.data.status==1){
                     new Promise((resolve,reject)=>{
                        localStorage.userInfo= {username:this.username}
                        setTimeout(()=>{resolve()},500)
@@ -83,11 +81,10 @@
                    }).catch(err=>{
                        Toast.fail('登录状态保存失败')
                        console.log(err)
-                   })
-                   
+                   }) 
                     
                 }else{
-                    Toast.fail('登录失败')
+                    Toast.fail(response.data.message)
                     this.openLoading = false;
                 }
                })

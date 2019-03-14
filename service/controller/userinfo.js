@@ -5,18 +5,17 @@ router.get('/',async(cxt)=>{
     cxt.body="用户操作首页"
 })
 router.post('/register',async(ctx)=>{
-   
     const User = mongoose.model('userInfo')
     let newUser = new User(ctx.request.body)
 
     await newUser.save().then(()=>{
         ctx.body={
-            code:200,
+            status:1,
             message:'注册成功'
         }
     }).catch(error=>{
         ctx.body={
-            code:500,
+            status:0,
             message:error
         }
     })

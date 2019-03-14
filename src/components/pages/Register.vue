@@ -1,8 +1,8 @@
 <template>
     <div>
         <van-nav-bar
-            title="用户登录"
-            left-text=""
+            title="用户注册"
+            left-text="返回"
             left-arrow
             @click-left="goBack"
          />
@@ -27,7 +27,7 @@
                
             />
             <div class="register-button">
-                <van-button type="primary" @click="loginAction" size="large" :loading="openLoading">登录</van-button>
+                <van-button type="primary" @click="registerAction" size="large" :loading="openLoading">马上注册</van-button>
             </div>
          </div>
     </div>
@@ -47,23 +47,17 @@
                 passwordErrorMsg:'',  //当密码出现错误时的提示信息
             }
         },
-        created(){
-            if(localStorage.userInfo){
-                Toast.success('您已经登录过了')
-                this.$router.push('/')
-            }
-        },
        methods: {
            goBack() {
                this.$router.go(-1)
            },
-            loginAction(){
-                this.checkForm() && this.axiosLoginUser()
+            registerAction(){
+                this.checkForm() && this.axiosRegisterUser()
             },
-           axiosLoginUser(){
+           axiosRegisterUser(){
                this.openLoading=true;
                axios({
-                   url:url.login,
+                   url:url.registerUser,
                    method: 'post',
                    data:{
                        username:this.username,
@@ -71,25 +65,20 @@
                    }
                })
                .then(response=>{
-                if(response.data.status==1){
-                    new Promise((resolve,reject)=>{
-                       localStorage.userInfo= {username:this.username}
-                       setTimeout(()=>{resolve()},500)
-                   }).then(()=>{
-                        Toast.success('登录成功')
-                        this.$router.push('/')
-                   }).catch(err=>{
-                       Toast.fail('登录状态保存失败')
-                       console.log(err)
-                   }) 
-                    
-                }else{
-                    Toast.fail(response.data.message)
-                    this.openLoading = false;
-                }
+                   console.log(response)
+                   if(response.data.status==1){
+                       Toast.success(response.data.message)
+                       this.openLoading=false
+                       this.$router.push('/')
+                   }else{
+                       console.log(response.data.message)
+                       this.openLoading=false
+                       Toast.fail('注册失败')
+                   }
                })
                .catch((error)=>{
-                    Toast.fail('登录失败')
+                   console.log(error)
+                   Toast.fail('注册失败')
                     this.openLoading=false
                })
            },
@@ -123,9 +112,5 @@
     }
     .register-button{
         padding-top:10px;
-    }
-    .van-button--primary {
-        background-color: #f7504e;
-        border: 1px solid #f7504e;
     }
 </style>

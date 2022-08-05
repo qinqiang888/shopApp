@@ -18,7 +18,7 @@
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "koa2-cors": "^2.0.6",
-    "mongoose": "^5.4.17",
+    "mongoose": "^5.7.5",
     "vant": "^1.6.8",
     "vue": "^2.5.2",
     "vue-awesome-swiper": "^3.1.3",
